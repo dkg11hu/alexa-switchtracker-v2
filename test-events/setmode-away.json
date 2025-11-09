@@ -1,0 +1,21 @@
+{
+  "directive": {
+    "header": {
+      "namespace": "Alexa.ModeController",
+      "name": "SetMode",
+      "payloadVersion": "3",
+      "messageId": "abc-456",
+      "correlationToken": "token-xyz"
+    },
+    "endpoint": {
+      "scope": {
+        "type": "BearerToken",
+        "token": "access-token-from-skill"
+      },
+      "endpointId": "switchtracker-device-id"
+    },
+    "payload": {
+      "mode": "Away"
+    }
+  }
+}

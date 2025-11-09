@@ -1,0 +1,33 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "SwitchTracker",
+          "summary": "Track switch states via Alexa",
+          "description": "A smart home skill to track switch states and log events.",
+          "examplePhrases": [
+            "Alexa, ask SwitchTracker to log switch on",
+            "Alexa, tell SwitchTracker the switch is off"
+          ],
+          "keywords": [
+            "switch",
+            "tracker",
+            "smart home",
+            "logging"
+          ]
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "Use the Alexa app to link your account and invoke the skill with example phrases.",
+      "category": "SMART_HOME"
+    },
+    "apis": {
+      "smartHome": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:eu-west-1:719137109375:function:SwitchTracker"
+        }
+      }
+    }
+  }
+}

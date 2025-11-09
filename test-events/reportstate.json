@@ -1,0 +1,19 @@
+{
+  "directive": {
+    "header": {
+      "namespace": "Alexa",
+      "name": "ReportState",
+      "payloadVersion": "3",
+      "messageId": "abc-789",
+      "correlationToken": "token-xyz"
+    },
+    "endpoint": {
+      "scope": {
+        "type": "BearerToken",
+        "token": "access-token-from-skill"
+      },
+      "endpointId": "switchtracker-device-id"
+    },
+    "payload": {}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "directive": {
+    "header": {
+      "namespace": "Alexa.PowerController",
+      "name": "TurnOn",
+      "payloadVersion": "3",
+      "messageId": "abc-321",
+      "correlationToken": "token-xyz"
+    },
+    "endpoint": {
+      "scope": {
+        "type": "BearerToken",
+        "token": "access-token-from-skill"
+      },
+      "endpointId": "switchtracker-device-id"
+    },
+    "payload": {}
+  }
+}
