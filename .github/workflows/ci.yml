@@ -1,0 +1,54 @@
+name: backend-deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  backend-deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ github.workspace }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Echo Python and Node versions
+        run: |
+          python3 --version
+          node --version
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Configure Git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Sanity check Lambda function name
+        run: |
+          echo "Lambda function to update: ${{ secrets.LAMBDA_FUNCTION_NAME }}"
+
+      - name: Package Lambda
+        run: ./package-lambda.sh
+
+      - name: Deploy Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name "$LAMBDA_FUNCTION_NAME" \
+            --zip-file fileb://switch_tracker/lambda.zip \
+            --region "$AWS_REGION"
+
+      - name: Post-deploy test
+        run: ./post_deploy_test.sh
