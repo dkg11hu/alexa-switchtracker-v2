@@ -1,0 +1,27 @@
+{
+  "context": {
+    "properties": [
+      {
+        "namespace": "Alexa.ModeController",
+        "instance": "TravelState",
+        "name": "mode",
+        "value": "Home",
+        "timeOfSample": "2025-11-10T14:45:59.503426+00:00",
+        "uncertaintyInMilliseconds": 500
+      }
+    ]
+  },
+  "event": {
+    "header": {
+      "namespace": "Alexa",
+      "name": "Response",
+      "messageId": "b6c92ef5-c645-4ea4-87bc-bcf24473b0b7",
+      "correlationToken": "token-xyz",
+      "payloadVersion": "3"
+    },
+    "endpoint": {
+      "endpointId": "switchtracker-device-id"
+    },
+    "payload": {}
+  }
+}

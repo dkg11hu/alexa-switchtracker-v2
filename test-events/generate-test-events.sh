@@ -1,91 +1,75 @@
 #!/bin/bash
+set -euo pipefail
 
-mkdir -p test-events
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+mkdir -p "$SCRIPT_DIR"
 
-# Discovery directive
-cat > test-events/discovery.json <<EOF
-{
-  "directive": {
-    "header": {
-      "namespace": "Alexa.Discovery",
-      "name": "Discover",
-      "payloadVersion": "3",
-      "messageId": "abc-123"
-    },
-    "payload": {}
-  }
-}
-EOF
+echo "🧪 Generating Alexa test payloads..."
 
-# SetMode directive (Away)
-cat > test-events/setmode-away.json <<EOF
+# ModeController payloads
+for mode in waiting coming leaving away home travel; do
+  cat > "$SCRIPT_DIR/setmode-${mode}.json" <<EOF
 {
   "directive": {
     "header": {
       "namespace": "Alexa.ModeController",
       "name": "SetMode",
-      "payloadVersion": "3",
-      "messageId": "abc-456",
-      "correlationToken": "token-xyz"
+      "instance": "TravelState",
+      "messageId": "msg-${mode}",
+      "correlationToken": "token-xyz",
+      "payloadVersion": "3"
     },
     "endpoint": {
-      "scope": {
-        "type": "BearerToken",
-        "token": "access-token-from-skill"
-      },
       "endpointId": "switchtracker-device-id"
     },
     "payload": {
-      "mode": "Away"
+      "mode": "${mode^}"
     }
   }
 }
 EOF
+  echo "✅ Created: setmode-${mode}.json"
+done
 
-# ReportState directive
-cat > test-events/reportstate.json <<EOF
+# Discovery payload
+cat > "$SCRIPT_DIR/discovery.json" <<EOF
 {
   "directive": {
     "header": {
-      "namespace": "Alexa",
-      "name": "ReportState",
-      "payloadVersion": "3",
-      "messageId": "abc-789",
-      "correlationToken": "token-xyz"
+      "namespace": "Alexa.Discovery",
+      "name": "Discover",
+      "messageId": "msg-discovery",
+      "payloadVersion": "3"
     },
-    "endpoint": {
+    "payload": {
       "scope": {
         "type": "BearerToken",
         "token": "access-token-from-skill"
-      },
-      "endpointId": "switchtracker-device-id"
-    },
-    "payload": {}
+      }
+    }
   }
 }
 EOF
+echo "✅ Created: discovery.json"
 
-# TurnOn directive
-cat > test-events/turnon.json <<EOF
+# TurnOn payload
+cat > "$SCRIPT_DIR/turnon.json" <<EOF
 {
   "directive": {
     "header": {
       "namespace": "Alexa.PowerController",
       "name": "TurnOn",
-      "payloadVersion": "3",
-      "messageId": "abc-321",
-      "correlationToken": "token-xyz"
+      "messageId": "msg-turnon",
+      "correlationToken": "token-xyz",
+      "payloadVersion": "3"
     },
     "endpoint": {
-      "scope": {
-        "type": "BearerToken",
-        "token": "access-token-from-skill"
-      },
       "endpointId": "switchtracker-device-id"
     },
     "payload": {}
   }
 }
 EOF
+echo "✅ Created: turnon.json"
 
-echo "✅ Test event files created in ./test-events/"
+echo "🎉 All test payloads generated in $SCRIPT_DIR"

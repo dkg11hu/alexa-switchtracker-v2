@@ -3,9 +3,14 @@
     "header": {
       "namespace": "Alexa.Discovery",
       "name": "Discover",
-      "payloadVersion": "3",
-      "messageId": "abc-123"
+      "messageId": "msg-discovery",
+      "payloadVersion": "3"
     },
-    "payload": {}
+    "payload": {
+      "scope": {
+        "type": "BearerToken",
+        "token": "access-token-from-skill"
+      }
+    }
   }
 }

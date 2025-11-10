@@ -1,0 +1,59 @@
+{
+  "event": {
+    "header": {
+      "namespace": "Alexa.Discovery",
+      "name": "Discover.Response",
+      "messageId": "d9e98a0a-c1ac-49fa-9dfd-9f53d05e3d38",
+      "payloadVersion": "3"
+    },
+    "payload": {
+      "endpoints": [
+        {
+          "endpointId": "travel_state",
+          "manufacturerName": "GaborTech",
+          "friendlyName": "Travel State",
+          "description": "Virtual switch tracking waiting/coming/leaving",
+          "displayCategories": [
+            "SWITCH"
+          ],
+          "capabilities": [
+            {
+              "type": "AlexaInterface",
+              "interface": "Alexa.ModeController",
+              "instance": "TravelState",
+              "version": "3",
+              "properties": {
+                "supported": [
+                  {
+                    "name": "mode"
+                  }
+                ],
+                "proactivelyReported": false,
+                "retrievable": true
+              },
+              "configuration": {
+                "ordered": false,
+                "supportedModes": [
+                  {
+                    "value": "waiting"
+                  },
+                  {
+                    "value": "coming"
+                  },
+                  {
+                    "value": "leaving"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "AlexaInterface",
+              "interface": "Alexa",
+              "version": "3"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

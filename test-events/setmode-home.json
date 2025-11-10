@@ -1,15 +1,18 @@
 {
   "directive": {
     "header": {
-      "namespace": "Alexa.PowerController",
-      "name": "TurnOn",
-      "messageId": "msg-turnon",
+      "namespace": "Alexa.ModeController",
+      "name": "SetMode",
+      "instance": "TravelState",
+      "messageId": "msg-home",
       "correlationToken": "token-xyz",
       "payloadVersion": "3"
     },
     "endpoint": {
       "endpointId": "switchtracker-device-id"
     },
-    "payload": {}
+    "payload": {
+      "mode": "Home"
+    }
   }
 }
